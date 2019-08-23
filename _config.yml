@@ -9,12 +9,12 @@
 locale                   : "en-US"
 title                    : "Snehal Nair"
 title_separator          : "-"
-name                     : &name "Sohan Seth"
-description              : &description "Senior Data Scientist"
-url                      : https://sohanseth.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+name                     : &name "Snehal Nair"
+description              : &description "Data Scientist"
+url                      : https://snehalnair.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "snehalnair.github.io"
-teaser                   : "SohanSethIDA.jpg"
+teaser                   : ""
 breadcrumbs              : false # true, false (default)
 words_per_minute         : 160
 future                   : true
@@ -79,12 +79,12 @@ analytics:
 
 # Site Author
 author:
-  name             : "Sohan Seth"
-  avatar           : "SohanSethIDA.jpg"
-  bio              : "Senior Data Scientist"
+  name             : "Snehal Nair"
+  avatar           : ""
+  bio              : "Data Scientist"
   location         : "Edinburgh"
   employer         :
-  googlescholar    : "https://scholar.google.com/citations?user=aFVQq-QAAAAJ&hl=en"
+  googlescholar    : ""
   email            :
   uri              :
   bitbucket        :
@@ -93,7 +93,7 @@ author:
   flickr           :
   facebook         :
   foursquare       :
-  github           : "sohanseth"
+  github           : "snehalnair"
   google_plus      :
   keybase          :
   instagram        :
