@@ -14,7 +14,7 @@ description              : &description "Data Scientist"
 url                      : https://snehalnair.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "snehalnair.github.io"
-teaser                   : ""
+teaser                   : "snehal_profile_pic.jpeg"
 breadcrumbs              : false # true, false (default)
 words_per_minute         : 160
 future                   : true
