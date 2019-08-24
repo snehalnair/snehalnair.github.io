@@ -11,17 +11,20 @@ redirect_from:
 
 Education
 ======
-* B.S. in Instrumentation and Electronics Engineering, Jadavpur University, 2005
-* M.S. in Electrical and Computer Engineering, University of Florida, 2008
-* Ph.D in Electrical and Computer Engineering, University of Florida, 2011
+* B.Sc. in Chemistry, Mumbai University, 2004
+* M.Sc. in Data Science, Lancaster University, 2017
 
 Work experience
 ======
-* Junior Research Fellow, Jadavpur University, 2005-2006
-* Postdoctoral Researcher, Aalto University, 2011-2014 
-* Postdoctoral Researcher, University of Edinburgh, 2014-2018
-* Senior Data Scientist, University of Edinburgh, 2018-Present
+* Data Scientist, Pricesearcher, UK, Feb 2018 - Mar 2018
+* Data Scientist, Guide2Property, Belgium, Jun 2017 - Oct 2017
+* Data Scientist, Digital Rail, UK, Jan 2017 - Apr 2017,
+* Data Scientist, Scoretrend, India, Jun 2016 - Oct 2016
+* Data Scientist, Nielsen, Dubai, Jul 2012 - Jul 2015
+* Analytics Manager, Datamatics, India, Feb 2008 - Dec 2011
+* Team Leader, WNS, India, May 2006 - Feb 2008
+* Research Associate, Ugam, India, Sep 2004 - May 2006
 
 Skills
 ======
-* MATLAB, C, Python, R, SPARQL
+* Python, SQL, R, SPARK
