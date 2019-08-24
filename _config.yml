@@ -84,7 +84,7 @@ author:
   bio              : "Data Scientist"
   location         : "Edinburgh"
   employer         :
-  googlescholar    : ""
+  #googlescholar    : ""
   email            :
   uri              :
   bitbucket        :
@@ -99,7 +99,7 @@ author:
   instagram        :
   lastfm           :
   linkedin         :
-  orcid            : "http://orcid.org/0000-0002-7464-4752"
+  #orcid            : "http://orcid.org/0000-0002-7464-4752"
   pinterest        :
   soundcloud       :
   stackoverflow    : # http://stackoverflow.com/users/123456/username
