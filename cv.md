@@ -25,25 +25,25 @@ Senior-level Artificial Intelligence (AI) and Machine Learning (ML) leader with 
 - Operational Excellence: MLOps, Ablation-First Research Culture, Automated Safety Gates, Latency Optimization (<50ms P95).
 
 ## Professional Experience
-### VIATOR (TRIPADVISOR GROUP) | London, UK
-Machine Learning Manager (Head of AI) | Mar 2022 - Dec 2025
+## Viator (Tripadvisor Group) | London, UK
+### Machine Learning Manager (Head of AI function) | Mar 2022 - Dec 2025
 - AI Function Inception: Built and scaled the AI function from 0 to 12+ Principal and Senior Scientists, establishing an "Ablation-First" culture that justified every deployment via ROI and cost-performance.
 - Strategic Impact: Delivered 50M+ in business impact through a suite of AI products, including Search Optimization, Personalized Recommendations, and Image Enhancements.
 - GenAI & LLMOps: Built policy-compliant LLM infrastructure (AWS, TogetherAI) with traffic control and observability, reducing cost-per-inference by 27%.
 - Responsible AI Governance: Designed a "Critic-at-the-Edge" Safety Gate that reduced high-risk incidents by 92% with <10ms validation latency.
 - Thought Leadership: Lead author for ACM KDD 2025 research on cost-aware prompt optimization; co-designed GenAI research programs with the University of Edinburgh.
 
-### SCOTTISH POWER | Glasgow, UK
-Lead Data Scientist | Oct 2019 - Mar 2022
+## Scottish Power | Glasgow, UK
+### Lead Data Scientist | Oct 2019 - Mar 2022
 - Predictive Analytics: Led development of statistical and ML models for energy forecasting, customer churn (propensity), and NILM-based energy disaggregation.
 - Capability Building: Founded the internal "ML Academy" to accelerate AI literacy and cross-organizational adoption of advanced analytics.
 
-### QUERYCLICK | Edinburgh, UK
-Senior Data Scientist | Sep 2019 - Sep 2020
+## Queryclick | Edinburgh, UK
+### Senior Data Scientist | Sep 2019 - Sep 2020
 - High-Scale Modeling: Built deep learning attribution models (CNN-RNN, LSTM) processing 4M+ daily events; improved attribution accuracy by 30% post-cookie depreciation.
 
-### NIELSEN | Dubai, UAE
-Senior Data Science Manager | Jul 2012 - Oct 2016
+## Nielsen | Dubai, UAE
+### Senior Data Science Manager | Jul 2012 - Oct 2016
 - Regional Leadership: Led a 15-member team delivering ML solutions in telecom, retail, and media across the Middle East and North Africa.
 - Operational Excellence: Reduced project delivery timelines from 90 days to 5 days via workflow automation; recognized with the "Excellence in Leadership Award".
 
