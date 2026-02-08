@@ -7,9 +7,12 @@ permalink: /cv/
 # Snehal Nair
 Senior AI Engineering Leader | Head of AI & Innovations
 
-Edinburgh, UK | +44 7864930078 | snehal.1409@gmail.com  
-LinkedIn: linkedin.com/in/snehal-nair-5351998 | Medium: medium.com/@snehalnair  
-Portfolio: https://docs.google.com/document/u/0/d/11uFK_VEY6dlxgBnCome4kUz4_wfSJB2jQzs_3sBtQfw/edit
+Edinburgh, UK | +44 7864930078 | snehal.1409@gmail.com
+
+[Linkedin](https://linkedin.com/in/snehal-nair-5351998) | [Portfolio] (https://docs.google.com/document/u/0/d/11uFK_VEY6dlxgBnCome4kUz4_wfSJB2jQzs_3sBtQfw/edit) | [Medium](medium.com/@snehalnair)
+
+
+
 
 ## Executive Summary
 Senior-level Artificial Intelligence (AI) and Machine Learning (ML) leader with 10+ years of global experience delivering enterprise AI strategy, platform scaling, and applied innovation. Proven success in building AI functions from inception, scaling teams from 0 to 12+ members, and deploying production-grade Generative AI (GenAI) and Agentic RAG systems. Published researcher (ACM KDD 2025) focused on the economic optimization of LLMs and high-stakes AI governance. Expert at aligning technical rigor with business growth, having delivered 50M+ in measurable impact.
