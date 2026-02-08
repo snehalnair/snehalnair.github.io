@@ -1,4 +1,5 @@
 ---
+layout: page
 title: "Active Learning for Traveler Tips Extraction"
 excerpt: "Fine-tuned SLM with 0.84 F1 and 99.3% lower inference cost."
 ---

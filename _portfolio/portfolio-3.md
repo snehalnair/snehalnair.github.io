@@ -1,4 +1,5 @@
 ---
+layout: page
 title: "Review Summarization at Scale"
 excerpt: "Multilingual ABSA pipeline cutting LLM token usage by 82% and hallucinations to 1.8%."
 ---

@@ -1,4 +1,5 @@
 ---
+layout: page
 title: "Automated FAQ Extraction (Knowledge Governance System)"
 excerpt: "GraphRAG + agentic validation system cutting hallucinations to 2.1%."
 ---

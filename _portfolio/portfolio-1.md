@@ -1,4 +1,5 @@
 ---
+layout: page
 title: "Cost-Aware Automatic Prompt Optimization (APO)"
 excerpt: "Hybrid APE-OPRO prompt optimization with 18% lower API cost and 0.84 F1."
 ---

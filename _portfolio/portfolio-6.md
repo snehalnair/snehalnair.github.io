@@ -1,4 +1,5 @@
 ---
+layout: page
 title: "Enterprise AI Governance Framework (Responsible AI)"
 excerpt: "Safety gate with 100% coverage and <10ms validation latency."
 ---

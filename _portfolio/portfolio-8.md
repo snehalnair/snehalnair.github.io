@@ -1,4 +1,5 @@
 ---
+layout: page
 title: "Cross-Portfolio Engineering Practices"
 excerpt: "Standardized experimentation, monitoring, and reproducibility across ML systems."
 ---
