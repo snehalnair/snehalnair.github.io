@@ -4,9 +4,14 @@ title: home
 ---
 
 ## Senior AI Engineering Leader | Head of AI & Innovations
-Edinburgh, UK | +44 7864930078 | snehal.1409@gmail.com  
-LinkedIn: linkedin.com/in/snehal-nair-5351998 | Medium: medium.com/@snehalnair  
-Portfolio: https://docs.google.com/document/u/0/d/11uFK_VEY6dlxgBnCome4kUz4_wfSJB2jQzs_3sBtQfw/edit
+
+| Location | Phone | Email |
+| --- | --- | --- |
+| Edinburgh, UK | +44 7864930078 | snehal.1409@gmail.com |
+
+| LinkedIn | Medium | Portfolio |
+| --- | --- | --- |
+| https://linkedin.com/in/snehal-nair-5351998 | https://medium.com/@snehalnair | https://docs.google.com/document/u/0/d/11uFK_VEY6dlxgBnCome4kUz4_wfSJB2jQzs_3sBtQfw/edit |
 
 I build enterprise AI strategy, scale AI organizations, and deploy production-grade GenAI and agentic RAG systems. I have delivered 50M+ in measurable impact across search, personalization, and governance.
 
