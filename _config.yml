@@ -7,6 +7,7 @@ theme: minima
 markdown: kramdown
 kramdown:
   input: GFM
+future: true
 collections:
   portfolio:
     output: true
