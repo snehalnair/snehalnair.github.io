@@ -35,7 +35,7 @@ Beyond individual projects, I led strategic initiatives that shaped Viator's AI 
 ## Aggregate Impact
 | Initiative | Metric | Impact |
 | --- | --- | --- |
-| FAQ Automation | Ticket Deflection | 34% reduction (~$2.4M annual savings) |
+| FAQ Automation | Ticket Deflection | 34% reduction |
 | Prompt Optimization | Inference Cost | 18% reduction across classification workloads |
 | Review Summarization | Token Usage | 82% reduction in LLM costs for summaries |
 | Safety Framework | Incidents | 92% reduction in high-risk outputs |
