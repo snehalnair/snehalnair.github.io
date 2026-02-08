@@ -10,9 +10,10 @@ Task: Implement a responsible AI governance framework with mandatory safety chec
 Action:
 - Built a "Critic-at-the-Edge" safety gate with PII detection, content classification, and bias checks.
 - Added adversarial robustness (encoding detection, multi-turn analysis, red-team program).
-- Established source authority tiers and observability with audit trails.
+- Established source authority tiers (gold/silver/bronze) and conflict resolution.
+- Implemented observability with audit trails, Arize monitoring, and PagerDuty alerts.
 
 Results:
 - 100% of production endpoints integrated with the safety gate.
 - High-risk incidents reduced by 92% with ~8ms P95 validation overhead.
-- External compliance audit pass rate achieved.
+- External compliance audit pass rate achieved; false positive rate ~2.3%.

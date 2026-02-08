@@ -11,6 +11,7 @@ Action:
 - Led enterprise AI roadmap and transition to a decoupled "Search AI Lake" architecture.
 - Built an "Ablation-First" research culture and AI readiness programs.
 - Established cross-portfolio engineering practices (A/B testing, drift detection, reproducibility).
+- Standardized evaluation practices to improve offline-online alignment and guardrail metrics.
 
 Results:
 - Search personalization +4% NDCG@10 (~$2M annual revenue).
