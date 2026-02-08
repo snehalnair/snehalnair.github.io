@@ -3,7 +3,7 @@ layout: home
 title: home
 ---
 
-## Senior AI Engineering Leader | Head of AI & Innovations
+## Senior AI Leader | Head of AI & Innovations
 <table>
   <tr>
     <td style="width: 35%; vertical-align: top;">
