@@ -11,8 +11,7 @@ Edinburgh, UK | +44 7864930078 | snehal.1409@gmail.com
 
 [Linkedin](https://linkedin.com/in/snehal-nair-5351998) |
 [Medium](https://medium.com/@snehalnair) |
-[Portfolio] (https://docs.google.com/document/u/0/d/11uFK_VEY6dlxgBnCome4kUz4_wfSJB2jQzs_3sBtQfw/edit)
-
+[Visit My Website](https://snehalnair.github.io/)
 
 
 
