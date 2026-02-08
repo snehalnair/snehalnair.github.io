@@ -1,9 +1,7 @@
 ---
 layout: home
-title: Home
+title: Senior AI Engineering Leader | Head of AI & Innovations
 ---
-
-## Senior AI Engineering Leader | Head of AI & Innovations
 
 Edinburgh, UK | +44 7864930078 | snehal.1409@gmail.com  
 LinkedIn: linkedin.com/in/snehal-nair-5351998 | Medium: medium.com/@snehalnair  
