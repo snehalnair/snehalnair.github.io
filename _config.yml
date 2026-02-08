@@ -4,6 +4,9 @@ description: Resume and project portfolio
 url: ""
 baseurl: ""
 theme: minima
+markdown: kramdown
+kramdown:
+  input: GFM
 collections:
   portfolio:
     output: true

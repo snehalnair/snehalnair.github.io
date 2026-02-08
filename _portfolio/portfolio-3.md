@@ -35,6 +35,7 @@ Viator operates globally; 34% of reviews are non-English:
 - Validation: Native speaker spot-checks for top-5 languages (ES, FR, DE, IT, PT)
 
 ## Results
+
 | Metric | Baseline (Direct LLM) | Pipeline Method | Method |
 | --- | --- | --- | --- |
 | Theme Coverage | ~50% | 94.2% | Human annotation on 500 review sample |
@@ -59,6 +60,7 @@ Hybrid ABSA + clustering + LLM summarization pipeline:
 4. Statistical test: Chi-square p<0.01 for baseline vs. ground truth; p=0.34 for pipeline vs. ground truth
 
 ## Risks & Mitigations
+
 | Risk | Impact | Mitigation | Monitoring |
 | --- | --- | --- | --- |
 | Hallucination | Summaries contain invented details | Faithfulness check: every claim traced to source review | Weekly audit of 50 random summaries |

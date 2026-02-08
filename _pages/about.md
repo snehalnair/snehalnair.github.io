@@ -23,6 +23,7 @@ Beyond individual projects, I led strategic initiatives that shaped Viator's AI 
 - Knowledge Sharing: Monthly AI Guild sessions sharing learnings across product teams
 
 ## Aggregate Impact
+
 | Initiative | Metric | Impact |
 | --- | --- | --- |
 | FAQ Automation | Ticket Deflection | 34% reduction |

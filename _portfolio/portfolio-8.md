@@ -31,6 +31,7 @@ Offline metrics often don't translate to online gains. Practices:
 ## Embedding Model Selection Framework
 When selecting embedding models, evaluate:
 
+
 | Criterion | Benchmark | Threshold |
 | --- | --- | --- |
 | Task Relevance | Downstream task performance (e.g., retrieval recall) | Top-2 on internal benchmark |

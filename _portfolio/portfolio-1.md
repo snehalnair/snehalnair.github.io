@@ -25,6 +25,7 @@ Used APE's semantically diverse prompt generation (temperature=1.0, 20 candidate
 Systematically tuned breadth (prompt count: 5, 10, 20) and depth (iterations: 3, 5, 10) to identify diminishing returns. Found optimal configuration at 10 prompts x 5 iterations.
 
 ## Results
+
 | Metric | Manual Baseline | OPRO Only | Hybrid APE-OPRO |
 | --- | --- | --- | --- |
 | Weighted F1 | 0.78 | 0.84 | 0.84 |
@@ -51,6 +52,7 @@ The hybrid method matched state-of-the-art performance while reducing API costs 
 - Human Calibration: Quarterly audit of 100 random classifications against human labels; correlation >0.92
 
 ## Risks & Mitigations
+
 | Risk | Impact | Mitigation | Monitoring |
 | --- | --- | --- | --- |
 | Cost Explosion | OPRO generates long prompts | APE initialization flattens cost curve; token budget cap at 500 tokens/prompt | Real-time cost dashboard with alerts at 80% budget |

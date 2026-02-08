@@ -27,6 +27,7 @@ Reframe from a simple prompting problem to a system design problem. Build a "Kno
 When "Weather Policy" node updates to allow cancellations for >30C heat, all linked Product nodes' FAQs are flagged for regeneration. Graph traversal ensures no orphaned FAQs.
 
 ### Pillar 3: Agentic Validation (Coordination Architecture)
+
 | Agent | Trigger | Action | Output | Monitor |
 | --- | --- | --- | --- | --- |
 | Detect | Hourly cron + webhook on data change | Detect price/policy/API drift | Change event to queue | Change event received |
@@ -37,6 +38,7 @@ When "Weather Policy" node updates to allow cancellations for >30C heat, all lin
 Coordination: Redis Streams for event queue; agents are stateless workers consuming from streams. Idempotency keys prevent duplicate processing. Circuit breaker prevents cascade failures (max 100 regenerations/hour).
 
 ## Results
+
 | Metric | Baseline | System | Method |
 | --- | --- | --- | --- |
 | Hallucination Rate | 23% | 2.1% | Manual audit of 500 FAQs |
@@ -64,6 +66,7 @@ Coordination: Redis Streams for event queue; agents are stateless workers consum
 - Consistency Check: Daily job verifies all FAQs are consistent with current graph state
 
 ## Risks & Mitigations
+
 | Risk | Impact | Mitigation | Monitoring |
 | --- | --- | --- | --- |
 | Cascading Regeneration | Policy change triggers thousands of updates | Circuit breaker (100/hr max); priority queue for high-traffic products | Regeneration queue depth alerts |

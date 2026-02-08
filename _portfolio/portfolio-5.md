@@ -13,6 +13,7 @@ Fine-tune a Small Language Model to extract tips with accuracy exceeding few-sho
 ### Model Selection
 Evaluated three SLM candidates. Selected DeBERTa-v3-small: best balance of quality and latency for production serving.
 
+
 | Model | Parameters | Inference Latency | Base F1 (few-shot) |
 | --- | --- | --- | --- |
 | DistilBERT | 66M | 12ms | 0.68 |
@@ -39,6 +40,7 @@ LLM-generated labels introduce teacher model biases:
 - Validation: Final model evaluated only on human-labeled test set (not on LLM labels)
 
 ## Results
+
 | Metric | Few-Shot GPT-4 | Fine-Tuned DeBERTa | Method |
 | --- | --- | --- | --- |
 | F1 Score | 0.76 | 0.84 | Human-labeled test set (n=500) |
@@ -55,6 +57,7 @@ Model achieves 10.5% F1 improvement over few-shot baseline while reducing infere
 - Pipeline: Batch inference nightly on new reviews; results cached in Elasticsearch
 
 ## Risks & Mitigations
+
 | Risk | Impact | Mitigation | Monitoring |
 | --- | --- | --- | --- |
 | Class Imbalance | Model biased toward majority class | Balanced training + threshold calibration | Per-class precision/recall weekly |

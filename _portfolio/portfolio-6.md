@@ -37,6 +37,7 @@ Architecture achieving <10ms validation:
 - Alerting: PagerDuty integration for safety score anomalies (>2 std from baseline)
 
 ## Results
+
 | Metric | Before | After | Method |
 | --- | --- | --- | --- |
 | Safety Gate Coverage | 34% | 100% | All production endpoints integrated |
@@ -52,6 +53,7 @@ Modular Safety Layer integrated into LLMOps pipeline:
 - A/B Testing: New safety models tested in shadow mode before promotion
 
 ## Risks & Mitigations
+
 | Risk | Impact | Mitigation | Monitoring |
 | --- | --- | --- | --- |
 | Latency Bloat | Safety checks slow UX | SLMs + batching + parallel execution | P95 latency dashboard |
