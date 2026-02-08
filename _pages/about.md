@@ -1,13 +1,3 @@
----
-permalink: /about/
-title: #"academicpages is a ready-to-fork GitHub Pages template for academic personal websites"
-excerpt: "About me"
-author_profile: true
-redirect_from: 
-  - /about/
-  - /about.html
----
-
 Senior AI Engineering Leader | Head of AI & Innovations
 
 Edinburgh, UK | +44 7864930078 | snehal.1409@gmail.com  
