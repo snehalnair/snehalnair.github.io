@@ -7,8 +7,7 @@ permalink: /cv/
 # Snehal Nair
 Senior AI Engineering Leader | Head of AI & Innovations
 
-Edinburgh, UK| snehal.1409@gmail.com
-
+**Edinburgh, UK | snehal.1409@gmail.com**
 [Linkedin](https://linkedin.com/in/snehal-nair-5351998) |
 [Medium](https://medium.com/@snehalnair) |
 [Visit My Website](https://snehalnair.github.io/)
