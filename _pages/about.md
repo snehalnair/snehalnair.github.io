@@ -35,7 +35,6 @@ Beyond individual projects, I led strategic initiatives that shaped Viator's AI 
 ## Aggregate Impact
 | Initiative | Metric | Impact |
 | --- | --- | --- |
-| Search Personalization | NDCG@10 | +4% (translates to ~$2M incremental annual revenue) |
 | FAQ Automation | Ticket Deflection | 34% reduction (~$2.4M annual savings) |
 | Prompt Optimization | Inference Cost | 18% reduction across classification workloads |
 | Review Summarization | Token Usage | 82% reduction in LLM costs for summaries |
