@@ -1,3 +1,9 @@
+---
+layout: page
+title: About
+permalink: /about/
+---
+
 ## Senior AI Engineering Leader | Head of AI & Innovations
 
 Edinburgh, UK | +44 7864930078 | snehal.1409@gmail.com  
@@ -30,4 +36,3 @@ Beyond individual projects, I led strategic initiatives that shaped Viator's AI 
 | Prompt Optimization | Inference Cost | 18% reduction across classification workloads |
 | Review Summarization | Token Usage | 82% reduction in LLM costs for summaries |
 | Safety Framework | Incidents | 92% reduction in high-risk outputs |
-
