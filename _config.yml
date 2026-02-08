@@ -1,0 +1,10 @@
+title: Snehal Nair
+email: snehal.1409@gmail.com
+description: Resume and project portfolio
+url: ""
+baseurl: ""
+theme: minima
+collections:
+  portfolio:
+    output: true
+    permalink: /portfolio/:name/
