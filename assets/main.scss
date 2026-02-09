@@ -43,3 +43,20 @@ th {
 .card p {
   margin: 0.35rem 0;
 }
+
+.btn-primary {
+  display: inline-block;
+  background: #1f6feb;
+  color: #ffffff;
+  padding: 0.5rem 0.85rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background: #1a5ecb;
+  color: #ffffff;
+  text-decoration: none;
+}

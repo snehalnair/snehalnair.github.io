@@ -11,7 +11,7 @@ title: home
       <p>Edinburgh, UK<br>
       snehal.1409@gmail.com<br>
       <a href="https://linkedin.com/in/snehal-nair-5351998">Linkedin</a></p>
-      <p><a href="/cv/">View my CV</a><br><a href="/portfolio/">Explore my project portfolio</a></p>
+      <p><a class="btn-primary" href="/Snehal%20Nair_Resume_2026.pdf">Download CV</a><br><a href="/portfolio/">Explore my project portfolio</a></p>
     </td>
     <td style="width: 45%; vertical-align: top;">
       <p>I bridge the gap between cutting-edge AI research and sustainable business impact. With a track record of publications at KDD 2024 & 2025, my work defines the frontier of Cost-Aware Prompt Optimization (APO) and Active Learning—solving the "trillion-token problem" for modern enterprises.
