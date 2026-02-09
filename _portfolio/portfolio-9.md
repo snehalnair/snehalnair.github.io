@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Attribution Modelling Deck"
+title: "Attribution Modelling"
 excerpt: "Slideshare deck on multi-touch attribution, data quality, and modeling trade-offs."
 ---
 
@@ -15,4 +15,4 @@ This deck walks through a practical attribution modelling workflow, covering dat
 - **Data Quality & Audits:** Emphasizes planned audits to maintain reliable attribution over time.
 
 ## Deck
-Slideshare: https://www.slideshare.net/slideshow/attribution-modelling-235957406/235957406#4
+[Slideshare](https://www.slideshare.net/slideshow/attribution-modelling-235957406/235957406#4)
