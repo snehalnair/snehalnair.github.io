@@ -14,7 +14,11 @@ title: home
       <p><a href="/cv/">View my CV</a><br><a href="/portfolio/">Explore my project portfolio</a></p>
     </td>
     <td style="width: 45%; vertical-align: middle;">
-      <p>I build enterprise AI strategy, scale AI organizations, and deploy production-grade multi-agent systems, GenAI and agentic RAG systems. I have delivered 50M+ in measurable impact across recommender systems, personalization, and governance.</p>
+      <p>I bridge the gap between cutting-edge AI research and sustainable business impact. With a track record of publications at KDD 2024 & 2025, my work defines the frontier of Cost-Aware Prompt Optimization (APO) and Active Learning—solving the "trillion-token problem" for modern enterprises.
+
+I specialize in architecting AI systems that don't just work, but scale. From building high-throughput recommender systems to optimizing LLM orchestration, I lead the transition from experimental R&D to production-grade AI. My mission is to help organizations deploy intelligent systems that maximize performance while aggressively minimizing computational overhead and operational risk.
+
+Core Expertise: AI Strategy & Roadmap | LLM Efficiency | Scalable Machine Learning (PySpark) | Research Leadership (KDD, Towards Data Science)</p>
     </td>
   </tr>
 </table>
