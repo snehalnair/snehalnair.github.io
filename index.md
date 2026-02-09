@@ -14,13 +14,13 @@ title: home
       <p><a class="btn-primary" href="/Snehal%20Nair_Resume_2026.pdf">Download CV</a><br><a href="/portfolio/">Explore my project portfolio</a></p>
     </td>
     <td style="width: 45%; vertical-align: top;">
-      <p>I bridge the gap between cutting-edge AI research and sustainable business impact. With a track record of publications at KDD 2024 & 2025, my work defines the frontier of Cost-Aware Prompt Optimization (APO) and Active Learning—solving the "trillion-token problem" for modern enterprises.
+      <p>I bridge the gap between cutting-edge AI research and sustainable business impact. With a track record of publications at KDD 2024 & 2025, my work defines the frontier of Cost-Aware Prompt Optimization (APO) and Active Learning—solving the "trillion-token problem" for modern enterprises.</p>
 
 
-I specialize in architecting AI systems that don't just work, but scale. From building high-throughput recommender systems to optimizing LLM orchestration, I lead the transition from experimental R&D to production-grade AI. My mission is to help organizations deploy intelligent systems that maximize performance while aggressively minimizing computational overhead and operational risk.
+</p>I specialize in architecting AI systems that don't just work, but scale. From building high-throughput recommender systems to optimizing LLM orchestration, I lead the transition from experimental R&D to production-grade AI. My mission is to help organizations deploy intelligent systems that maximize performance while aggressively minimizing computational overhead and operational risk.</p>
 
 
-**Core Expertise**: AI Strategy & Roadmap | LLM Efficiency | Scalable Machine Learning (PySpark) | Research Leadership (KDD, Towards Data Science)</p>
+</p>**Core Expertise**: AI Strategy & Roadmap | LLM Efficiency | Scalable Machine Learning (PySpark) | Research Leadership (KDD, Towards Data Science)</p>
     </td>
   </tr>
 </table>
