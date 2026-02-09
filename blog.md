@@ -7,10 +7,12 @@ permalink: /blog/
 {% if site.posts and site.posts.size > 0 %}
 <div class="card-grid">
   {% for post in site.posts %}
-  {% assign card_image = post.image | default: "/Profile%20pic.jpeg" %}
+  {% assign card_image = post.image %}
   {% assign card_summary = post.summary | default: post.excerpt | strip_html | truncate: 180 %}
   <div class="card" data-original-url="{{ post.original_url }}">
+    {% if card_image %}
     <img src="{{ card_image }}" alt="{{ post.title }}" style="width: 100%; border-radius: 8px; margin-bottom: 0.5rem;" />
+    {% endif %}
     <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
     {% if card_summary %}
     <p class="card-summary">{{ card_summary }}</p>
