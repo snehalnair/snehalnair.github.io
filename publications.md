@@ -9,7 +9,7 @@ permalink: /publications/
 <div class="card-grid">
   <div class="card">
     <h3><a href="https://arxiv.org/pdf/2507.15884v1">Prompt Smart, Pay Less: Cost-Aware APO for Real-World Application</a></h3>
-    <p>Developed a framework that reduces LLM inference costs by 30% while maintaining performance, directly addressing the primary barrier to enterprise AI adoption.<p>
+    <p>Developed a framework that reduces LLM inference costs by 30% while maintaining performance, directly addressing the primary barrier to enterprise AI adoption.</p>
     <p>Jayesh Choudhari, Douglas McIlwraith, Piyush Kumar Singh, Snehal Nair</p>
     <p><a href="https://arxiv.org/pdf/2507.15884v1">PDF</a></p>
   </div>
