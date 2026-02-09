@@ -16,7 +16,7 @@ permalink: /publications/
   </div>
   <div class="card">
     <h3><a href="/Recommender%20Systems%20Thesis.pdf">Recommender Systems Thesis</a></h3>
-    <p>Recognizing that the standard constraint-driven search at Co-libry lacked personalization and failed to deliver "wonderful discoveries" for users, I led the transition from a rigid, rule-based engine to a sophisticated, intent-driven AI framework. I took the initiative to evaluate and ultimately move beyond industry-standard collaborative filtering — identifying its failure in high-sparsity real estate environments — to pioneer a novel approach based on Empirical Fuzzy Membership functions. By developing a purely data-driven, parameter-free model, I established a system that captures subjective user intent without the need for prior assumptions or massive datasets. This strategic shift not only outperformed traditional baselines like Logistic Regression but also provided a scalable roadmap for productionizing AI that directly aligns user behavior with business conversion goals.</p>
+    <p>Reinvented Co-libry’s search strategy by replacing rigid, rule-based constraints with a first-of-its-kind intent-driven AI framework. By pioneering a novel model based on Empirical Fuzzy Membership, I bypassed the limitations of industry-standard filtering in high-sparsity markets. This shift moved the product from 'functional search' to 'discovery-led conversion,' delivering a scalable AI roadmap that aligns user behavior directly with bottom-line growth</p>
     <p><a href="/">Snehal Nair</a></p>
     <p><a href="/Recommender%20Systems%20Thesis.pdf">PDF</a></p>
   </div>
