@@ -330,3 +330,16 @@ This system design integrates and extends several standalone projects into a uni
 | Prompt Optimization | [Cost-Aware APO](/portfolio/portfolio-1/) | Hybrid APE-OPRO used for fallback classifier prompt optimization; cost-aware prompt selection |
 | Safety & Governance | [Enterprise AI Governance](/portfolio/portfolio-6/) | Safety gate architecture (input + output validation); source authority hierarchies; adversarial defense |
 | Engineering Practices | [Cross-Portfolio Practices](/portfolio/portfolio-8/) | A/B testing methodology; model monitoring; embedding selection framework; failure mode analysis |
+
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+mermaid.initialize({ startOnLoad: false, theme: 'default' });
+document.querySelectorAll('code.language-mermaid').forEach(function(code) {
+  var pre = code.parentElement;
+  var el = document.createElement('pre');
+  el.className = 'mermaid';
+  el.textContent = code.textContent;
+  pre.parentElement.replaceChild(el, pre);
+});
+mermaid.run();
+</script>
