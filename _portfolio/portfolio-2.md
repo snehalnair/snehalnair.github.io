@@ -23,7 +23,7 @@ Design and architect an AI Customer Service Agent that:
 
 The agent is composed of six coordinated subsystems, each designed as an independent service with clear contracts:
 
-<div class="mermaid">
+<pre class="mermaid">
 graph TB
     subgraph Input Layer
         CQ[Customer Query] --> IR[Intent Router]
@@ -66,7 +66,7 @@ graph TB
     style SG2 fill:#9b2226,color:#fff
     style HE fill:#e76f51,color:#fff
     style AO fill:#264653,color:#fff
-</div>
+</pre>
 
 **Color key:** Green = existing portfolio systems ([Knowledge Engine](/portfolio/portfolio-4/), [Traveler Intelligence](/portfolio/portfolio-5/)); Red = safety layer ([Governance Framework](/portfolio/portfolio-6/)); Orange = HITL; Blue = orchestration.
 
@@ -117,7 +117,7 @@ Detailed in the [Active Learning for Traveler Tips portfolio piece](/portfolio/p
 
 Three-tier memory system balancing context richness against latency and cost:
 
-<div class="mermaid">
+<pre class="mermaid">
 graph LR
     subgraph Tier 1: Session Memory
         direction TB
@@ -151,7 +151,7 @@ graph LR
     style PC fill:#e9c46a,color:#000
     style PO fill:#e9c46a,color:#000
     style FC fill:#e9c46a,color:#000
-</div>
+</pre>
 
 | Tier | Storage | TTL | Latency | Content |
 | --- | --- | --- | --- | --- |
@@ -173,7 +173,7 @@ The orchestrator is the central coordinator. It receives classified intent + saf
 
 **Query Lifecycle (Swimlane):**
 
-<div class="mermaid">
+<pre class="mermaid">
 sequenceDiagram
     participant C as Customer
     participant SG as Safety Gate
@@ -214,7 +214,7 @@ sequenceDiagram
         SG2->>H: Escalate with full context package
         H->>C: Human-assisted response
     end
-</div>
+</pre>
 
 **Latency Budget Breakdown:**
 
