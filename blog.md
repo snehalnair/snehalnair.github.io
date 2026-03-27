@@ -13,7 +13,7 @@ permalink: /blog/
     <img
       src="{% if card_image %}{{ card_image }}{% endif %}"
       alt="{{ post.title }}"
-      style="width: 100%; border-radius: 8px; margin-bottom: 0.5rem; {% if not card_image %}display: none;{% endif %}"
+      style="width: 100%; border-radius: 8px; margin-bottom: 0.5rem; {% unless card_image %}display: none;{% endunless %}"
     />
     <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
     <p class="card-summary" data-fallback="{{ fallback_summary }}"></p>
