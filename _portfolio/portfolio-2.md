@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "AI Customer Service Agent for Travel (System Design)"
-excerpt: "End-to-end agent architecture with GraphRAG knowledge, multi-tier memory, HITL escalation, and <1.5s P95 latency."
+excerpt: "End-to-end agent architecture with GraphRAG knowledge, multi-tier memory, HITL escalation, and sub-1.5s P95 latency."
 ---
 
 ## Situation
@@ -12,10 +12,10 @@ The core challenge was not building a chatbot. It was designing a **system of sy
 ## Task
 Design and architect an AI Customer Service Agent that:
 1. Resolves 60%+ of Tier-1 queries without human intervention
-2. Maintains <1.5s P95 end-to-end response latency
+2. Maintains under 1.5s P95 end-to-end response latency
 3. Keeps hallucination rate below 2% through grounded generation
 4. Provides graceful HITL escalation with full context handoff
-5. Operates within a cost budget of <$0.02 per conversation turn
+5. Operates within a cost budget of under $0.02 per conversation turn
 
 ## Action
 
@@ -85,7 +85,7 @@ Classifies incoming queries into actionable intents to determine which tools the
 | General / Browsing | "What's fun to do in Rome?" | Traveler Intelligence, Product Data | 12% |
 | Complaint / Escalation | "I want a refund now" | HITL Escalation (immediate) | 4% |
 
-**Implementation:** Fine-tuned DeBERTa-v3-base on 15K labeled support transcripts. Multi-label output (primary + secondary intent) with confidence scores. Queries with confidence <0.7 are routed to a fallback LLM classifier before escalation. Prompt optimization uses the [hybrid APE-OPRO approach](/portfolio/portfolio-1/) for the LLM fallback classifier.
+**Implementation:** Fine-tuned DeBERTa-v3-base on 15K labeled support transcripts. Multi-label output (primary + secondary intent) with confidence scores. Queries with confidence below 0.7 are routed to a fallback LLM classifier before escalation. Prompt optimization uses the [hybrid APE-OPRO approach](/portfolio/portfolio-1/) for the LLM fallback classifier.
 
 **Latency budget:** 15ms (ONNX-optimized, CPU inference).
 
@@ -155,7 +155,7 @@ graph LR
 
 | Tier | Storage | TTL | Latency | Content |
 | --- | --- | --- | --- | --- |
-| Session Memory | In-process (LRU) | Session duration | <1ms | Last 10 turns + extracted entities |
+| Session Memory | In-process (LRU) | Session duration | sub-1ms | Last 10 turns + extracted entities |
 | User Profile | DynamoDB | Persistent | 5-10ms | Booking history, preferences, past interactions |
 | Knowledge Cache | Redis | 24 hours | 2-5ms | Pre-generated FAQs, product attributes, policies |
 
@@ -227,7 +227,7 @@ sequenceDiagram
 | Traveler Tips | 15ms | Pre-indexed in Elasticsearch |
 | Response Generation | 1,200ms | GPT-4o-mini with 4K token context cap |
 | Safety Gate (output) | 8ms | Same as input gate |
-| **Total** | **<1,500ms** | **Parallel tool calls save ~30ms** |
+| **Total** | **under 1,500ms** | **Parallel tool calls save ~30ms** |
 
 ---
 
@@ -239,8 +239,8 @@ Not all queries should be automated. The escalation system ensures graceful hand
 
 | Trigger | Threshold | Action |
 | --- | --- | --- |
-| Low intent confidence | <0.7 after fallback classifier | Route to human |
-| Low response confidence | <0.85 generation confidence | Route to human |
+| Low intent confidence | below 0.7 after fallback classifier | Route to human |
+| Low response confidence | below 0.85 generation confidence | Route to human |
 | Sentiment detection | Anger/frustration score >0.8 | Route to human (priority queue) |
 | Explicit request | "Talk to a person" | Immediate route |
 | Policy complexity | Multi-policy conflict detected | Route to human |
@@ -298,12 +298,12 @@ This eliminates the "please repeat your issue" problem — human agents start wi
 | Metric | Baseline (No Agent) | Design Target | Pilot Result | Method |
 | --- | --- | --- | --- | --- |
 | Tier-1 Deflection Rate | 0% | 60% | 43% (pilot) | A/B test on 10K conversations |
-| P95 Response Latency | N/A | <1.5s | 1.3s | End-to-end measurement |
-| Hallucination Rate | N/A | <2% | 1.9% | Manual audit of 300 responses |
+| P95 Response Latency | N/A | under 1.5s | 1.3s | End-to-end measurement |
+| Hallucination Rate | N/A | under 2% | 1.9% | Manual audit of 300 responses |
 | CSAT (Automated Responses) | N/A | >4.0/5.0 | 4.1/5.0 | Post-conversation survey |
-| Cost per Turn | $2.50 (human) | <$0.02 (automated) | $0.018 | Infra + API cost tracking |
+| Cost per Turn | $2.50 (human) | under $0.02 (automated) | $0.018 | Infra + API cost tracking |
 | Escalation with Context | 0% (restarts) | 100% | 100% | Context package delivery rate |
-| Knowledge Freshness | 45 days avg | <24 hours | <24 hours | Source change to FAQ update |
+| Knowledge Freshness | 45 days avg | under 24 hours | under 24 hours | Source change to FAQ update |
 
 ---
 
