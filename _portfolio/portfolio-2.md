@@ -5,9 +5,11 @@ excerpt: "End-to-end agent architecture with GraphRAG knowledge, multi-tier memo
 ---
 
 ## Situation
-Viator handles millions of customer queries spanning bookings, cancellation policies, product questions, and post-trip issues across 300K+ experiences in 200+ destinations. Customer service was fragmented: agents toggled between 5+ internal tools, knowledge was siloed, and answers were inconsistent. Automating even simple queries required stitching together product data, policies, booking context, and traveler intelligence — none of which existed as a unified system.
+Viator's first chatbot pilot failed within two weeks. The bot confidently told a customer their Rome Colosseum tour included hotel pickup — it didn't. The hallucination happened because the bot retrieved a chat log from a *different* product (a Rome food tour that does include pickup) and treated it as ground truth. Three similar incidents followed, each generating a complaint escalation and a refund.
 
-The core challenge was not building a chatbot. It was designing a **system of systems** that could serve grounded, personalized answers at scale while knowing when to escalate to a human.
+The root cause wasn't the LLM. It was that answering a single customer question required stitching together data from 5+ disconnected systems: product attributes, supplier policies, booking records, chat history, and traveler reviews. No unified data layer existed, and the bot had no way to judge source reliability or know when it should escalate instead of guess.
+
+The challenge was not building a chatbot. It was designing an agent architecture where every answer is grounded, every source is ranked, and the system knows what it doesn't know.
 
 ## Task
 Design and architect an AI Customer Service Agent that:
@@ -21,7 +23,7 @@ Design and architect an AI Customer Service Agent that:
 
 ### System Architecture
 
-The agent is composed of six coordinated subsystems, each designed as an independent service with clear contracts:
+The agent is composed of five coordinated subsystems, each designed as an independent service with clear contracts:
 
 ```mermaid
 graph TB
@@ -91,29 +93,18 @@ Classifies incoming queries into actionable intents to determine which tools the
 
 ---
 
-### Subsystem 2: Knowledge Engine (GraphRAG)
+### Subsystem 2: Knowledge & Intelligence Layer
 
-This subsystem is detailed in the [Automated FAQ Extraction portfolio piece](/portfolio/portfolio-4/). In the agent context, it serves as the primary knowledge backbone:
+Two existing systems serve as the agent's knowledge backbone — the [GraphRAG Knowledge Engine](/portfolio/portfolio-4/) for policies and FAQs, and the [Traveler Tips extraction pipeline](/portfolio/portfolio-5/) for experiential intelligence. The agent-specific integration decisions were:
 
-- **Graph Structure:** Product -> HAS_POLICY -> Policy, Product -> HAS_FAQ -> FAQ, Policy -> SUPERSEDES -> Policy
-- **Retrieval:** Hybrid semantic + lexical search with source authority weighting (Gold/Silver/Bronze)
-- **Agent Integration:** The orchestrator issues structured tool calls (`get_policy(product_id, policy_type)`, `get_faqs(product_id, topic)`) rather than free-text retrieval, reducing hallucination surface area
-
-**Key design decision:** FAQs are pre-generated offline and cached, so the agent serves from cache (0ms LLM latency) for 92% of knowledge queries. Only novel or compound queries require real-time LLM generation.
-
----
-
-### Subsystem 3: Traveler Intelligence
-
-Detailed in the [Active Learning for Traveler Tips portfolio piece](/portfolio/portfolio-5/). In the agent context:
-
-- **Integration point:** When a customer asks about a product experience (not policy), the orchestrator retrieves relevant traveler tips alongside official product data
-- **Grounding signal:** Tips provide real-world context that official descriptions lack (e.g., "the stairs are steep — wear good shoes")
-- **Presentation:** Tips are attributed ("Based on recent traveler feedback...") and clearly separated from official information
+- **Structured tool calls over free-text retrieval:** The orchestrator issues `get_policy(product_id, policy_type)` and `get_faqs(product_id, topic)` rather than embedding-based search. This constrains the LLM to pre-validated knowledge and reduces hallucination surface area
+- **Offline-first with cache:** FAQs are pre-generated offline and served from Redis cache (0ms LLM latency) for 92% of knowledge queries. Only novel or compound queries require real-time generation — this is the single biggest cost and latency lever in the system
+- **Source attribution required:** Every agent response must cite its source tier (Gold: official policy, Silver: product data, Bronze: traveler tips). This is enforced in the response generation prompt and validated by the output safety gate
+- **Tip separation:** Traveler tips are never mixed with official information. They appear in a distinct section ("Based on recent traveler feedback...") to prevent customers from treating crowd-sourced opinions as company policy
 
 ---
 
-### Subsystem 4: Memory Architecture
+### Subsystem 3: Memory Architecture
 
 Three-tier memory system balancing context richness against latency and cost:
 
@@ -165,9 +156,22 @@ graph LR
 - User profile injection: only relevant fields loaded (e.g., for a booking query, load active bookings; for a general query, load preferences only)
 - Total context budget: 4,000 tokens max to keep generation fast and focused
 
+**Multi-Turn Conversation Handling:**
+Single-turn Q&A is straightforward. The harder problem is multi-turn conversations where customers switch topics, refer back to earlier context, or build on previous answers. Design decisions:
+- **Entity persistence:** Extracted entities (product ID, booking number, destination) persist across turns in working memory, so "what about the cancellation policy?" resolves to the product discussed 3 turns ago
+- **Topic switch detection:** Intent router compares current turn intent against session history. When intent shifts (e.g., from policy inquiry to booking change), the orchestrator reloads relevant tools rather than carrying stale context
+- **Clarification loops:** When entity resolution is ambiguous ("my Rome tour" but customer has 3 Rome bookings), the agent asks for clarification rather than guessing. Max 1 clarification question per conversation to avoid frustrating loops
+
+**Multilingual Support:**
+Viator operates globally; approximately 30% of support queries arrive in non-English languages. The agent handles this through:
+- **Language detection** at the Safety Gate stage (fastText lid.176, same as the [Review Summarization pipeline](/portfolio/portfolio-3/))
+- **Query translation** to English before intent classification and knowledge retrieval (NLLB-200)
+- **Response generation** in the detected language, with the LLM instructed to respond in the customer's language
+- **Known limitation:** Translation adds ~50ms latency and introduces occasional errors for low-resource languages. For the top 5 languages (Spanish, French, German, Italian, Portuguese), translation quality is validated quarterly by native speakers
+
 ---
 
-### Subsystem 5: Agent Orchestrator & Tool Use
+### Subsystem 4: Agent Orchestrator & Tool Use
 
 The orchestrator is the central coordinator. It receives classified intent + safety clearance, then executes a tool-use loop:
 
@@ -230,9 +234,9 @@ sequenceDiagram
 
 ---
 
-### Subsystem 6: HITL Escalation
+### Subsystem 5: HITL Escalation & Feedback Loop
 
-Not all queries should be automated. The escalation system ensures graceful handoff:
+Not all queries should be automated. The escalation system ensures graceful handoff and feeds human resolutions back into the knowledge system:
 
 **Escalation Triggers:**
 
@@ -254,21 +258,26 @@ When escalating, the agent passes a structured context package to the human agen
 - Agent's draft response (if generated) with confidence score
 - Reason for escalation
 
-This eliminates the "please repeat your issue" problem — human agents start with full context.
+This eliminates repeated context gathering — human agents start with full context.
+
+**Feedback Loop:**
+Escalated conversations are the system's most valuable training signal. After human resolution:
+- **Knowledge gap detection:** If the human agent answered using information not in the knowledge graph, the answer is flagged for potential FAQ generation (feeds into the [FAQ extraction pipeline](/portfolio/portfolio-4/))
+- **Intent classifier retraining:** Queries that were misclassified (wrong tools invoked) are added to the intent classifier training set. Quarterly retraining cycle
+- **Confidence threshold tuning:** Escalation rate is tracked by intent category. If a category escalates at >50%, the confidence threshold is lowered for that category to escalate earlier rather than generating low-quality responses
+- **What we chose NOT to automate:** After analyzing escalated queries, we identified that refund disputes, multi-booking conflicts, and supplier complaints should remain human-only. Automating these had negative CSAT impact in A/B tests even when the agent's answer was factually correct — customers wanted human empathy, not just correct information
 
 ---
 
 ### Cost Architecture
 
-| Component | Cost Driver | Per-Turn Cost | Optimization |
+| Component | Cost Driver | Est. Per-Turn Cost | Optimization |
 | --- | --- | --- | --- |
-| Intent Router | CPU inference | $0.0001 | ONNX optimization, batch inference |
-| Knowledge Retrieval | Cache hit: Redis; Miss: Elasticsearch | $0.0003 | 92% cache hit rate from offline FAQ generation |
-| Memory Lookup | DynamoDB reads | $0.0002 | Single-digit ms reads, pay-per-request |
-| Response Generation | GPT-4o-mini tokens | $0.012 | 4K token cap; cached responses for repeat queries |
-| Safety Gates | CPU inference (2x) | $0.0002 | DistilBERT, batched |
-| Infrastructure | ECS Fargate, Redis, DynamoDB | $0.005 | Shared across requests; amortized |
-| **Total** | | **$0.018** | **Under $0.02 target** |
+| Intent Router + Safety Gates | CPU inference (SLMs) | under $0.001 | ONNX optimization; DistilBERT + DeBERTa batched on CPU |
+| Knowledge + Memory Lookup | Redis cache + DynamoDB reads | under $0.001 | 92% cache hit rate from offline FAQ generation |
+| Response Generation | LLM tokens (GPT-4o-mini) | ~$0.010-0.015 | 4K token context cap; cached responses for repeat queries |
+| Infrastructure (amortized) | ECS Fargate, Redis, DynamoDB | ~$0.003-0.005 | Shared across requests; auto-scaling |
+| **Total** | | **~$0.015-0.020** | **Target: under $0.02** |
 
 **Cost Levers:**
 - **Cache hit rate** is the dominant cost driver. At 92% FAQ cache hit, only 8% of knowledge queries require LLM generation
@@ -300,9 +309,23 @@ This eliminates the "please repeat your issue" problem — human agents start wi
 | P95 Response Latency | N/A | under 1.5s | 1.3s | End-to-end measurement |
 | Hallucination Rate | N/A | under 2% | 1.9% | Manual audit of 300 responses |
 | CSAT (Automated Responses) | N/A | >4.0/5.0 | 4.1/5.0 | Post-conversation survey |
-| Cost per Turn | $2.50 (human) | under $0.02 (automated) | $0.018 | Infra + API cost tracking |
+| Cost per Turn | $2.50 (human) | under $0.02 (automated) | ~$0.018 | Infra + API cost tracking |
 | Escalation with Context | 0% (restarts) | 100% | 100% | Context package delivery rate |
 | Knowledge Freshness | 45 days avg | under 24 hours | under 24 hours | Source change to FAQ update |
+
+**Why 43% deflection, not 60%:**
+The pilot revealed that deflection rate is bounded by knowledge coverage, not agent capability. The agent correctly handled nearly every query where a cached FAQ existed (92% accuracy on policy and product questions). But 22% of queries fell into categories we hadn't anticipated — questions about local transport, combined-tour logistics, and accessibility — where no knowledge existed in the graph. The remaining gap came from multi-turn conversations where the agent resolved the first question but escalated on the follow-up.
+
+The path to 60% is not a better LLM. It's expanding the knowledge graph (ongoing via the [FAQ extraction pipeline](/portfolio/portfolio-4/)) and improving multi-turn handling.
+
+## Evaluation Methodology
+
+End-to-end agent evaluation is harder than component evaluation. A correct retrieval + correct generation can still produce a bad customer experience (wrong tone, unnecessary verbosity, missing context). Evaluation approach:
+
+- **Automated metrics (continuous):** Hallucination detection via NLI model comparing response claims against retrieved sources. Latency and cost tracked per-turn in Datadog. Intent classification accuracy measured against weekly human-labeled sample of 200 queries
+- **Human evaluation (weekly):** 100 randomly sampled conversations rated by trained annotators on 4 dimensions: correctness (factual accuracy), completeness (did it fully address the query), tone (appropriate for context), and efficiency (minimal unnecessary back-and-forth). Inter-annotator agreement measured via Cohen's kappa (target >0.7)
+- **A/B testing (pilot):** 10K conversations split between agent-handled and control (human-only). Primary metric: CSAT. Guardrail metrics: escalation rate, repeat contact rate within 24 hours, refund rate
+- **Failure analysis (monthly):** Every escalated conversation is categorized by failure mode: knowledge gap, intent misclassification, confidence calibration error, multi-turn breakdown, or customer preference for human. This drives prioritization of system improvements
 
 ---
 
