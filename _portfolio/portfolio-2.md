@@ -23,7 +23,7 @@ Design and architect an AI Customer Service Agent that:
 
 The agent is composed of six coordinated subsystems, each designed as an independent service with clear contracts:
 
-<pre class="mermaid">
+```mermaid
 graph TB
     subgraph Input Layer
         CQ[Customer Query] --> IR[Intent Router]
@@ -36,28 +36,28 @@ graph TB
         AO -->|tool calls| TC[Tool Controller]
     end
 
-    subgraph Knowledge & Data
-        TC --> KE[Knowledge Engine<br/>GraphRAG]
-        TC --> PD[Product Data<br/>Service]
-        TC --> TI[Traveler Intelligence<br/>Tips & Reviews]
+    subgraph Knowledge and Data
+        TC --> KE[Knowledge Engine - GraphRAG]
+        TC --> PD[Product Data Service]
+        TC --> TI[Traveler Intelligence - Tips and Reviews]
     end
 
     subgraph Memory
-        AO --> SM[Session Memory<br/>Conversation Buffer]
-        AO --> UP[User Profile<br/>Booking History]
-        AO --> KC[Knowledge Cache<br/>Redis]
+        AO --> SM[Session Memory - Conversation Buffer]
+        AO --> UP[User Profile - Booking History]
+        AO --> KC[Knowledge Cache - Redis]
     end
 
     subgraph Response
-        AO --> RG[Response Generator<br/>Grounded LLM]
-        RG --> SG2[Safety Gate<br/>Output Validation]
+        AO --> RG[Response Generator - Grounded LLM]
+        RG --> SG2[Safety Gate - Output Validation]
         SG2 -->|pass| CR[Customer Response]
         SG2 -->|fail| HE[HITL Escalation]
     end
 
     subgraph Human-in-the-Loop
-        AO -->|confidence < threshold| HE
-        HE --> HA[Human Agent<br/>+ Context Package]
+        AO -->|low confidence| HE
+        HE --> HA[Human Agent + Context Package]
     end
 
     style KE fill:#2d6a4f,color:#fff
@@ -66,7 +66,7 @@ graph TB
     style SG2 fill:#9b2226,color:#fff
     style HE fill:#e76f51,color:#fff
     style AO fill:#264653,color:#fff
-</pre>
+```
 
 **Color key:** Green = existing portfolio systems ([Knowledge Engine](/portfolio/portfolio-4/), [Traveler Intelligence](/portfolio/portfolio-5/)); Red = safety layer ([Governance Framework](/portfolio/portfolio-6/)); Orange = HITL; Blue = orchestration.
 
@@ -117,26 +117,26 @@ Detailed in the [Active Learning for Traveler Tips portfolio piece](/portfolio/p
 
 Three-tier memory system balancing context richness against latency and cost:
 
-<pre class="mermaid">
+```mermaid
 graph LR
-    subgraph Tier 1: Session Memory
+    subgraph Tier 1 - Session Memory
         direction TB
-        CB[Conversation Buffer<br/>Last 10 turns]
-        WM[Working Memory<br/>Extracted entities & intents]
+        CB[Conversation Buffer - Last 10 turns]
+        WM[Working Memory - Extracted entities]
     end
 
-    subgraph Tier 2: User Profile
+    subgraph Tier 2 - User Profile
         direction TB
-        BH[Booking History<br/>Active & past bookings]
-        CP[Customer Preferences<br/>Language, communication style]
-        IH[Interaction History<br/>Past issues & resolutions]
+        BH[Booking History - Active and past]
+        CP[Customer Preferences - Language, style]
+        IH[Interaction History - Past issues]
     end
 
-    subgraph Tier 3: Knowledge Cache
+    subgraph Tier 3 - Knowledge Cache
         direction TB
-        PC[Product Cache<br/>Attributes, pricing, availability]
-        PO[Policy Cache<br/>Pre-resolved policy lookups]
-        FC[FAQ Cache<br/>Pre-generated answers]
+        PC[Product Cache - Attributes, pricing]
+        PO[Policy Cache - Pre-resolved lookups]
+        FC[FAQ Cache - Pre-generated answers]
     end
 
     CB -.->|summarize on overflow| BH
@@ -151,7 +151,7 @@ graph LR
     style PC fill:#e9c46a,color:#000
     style PO fill:#e9c46a,color:#000
     style FC fill:#e9c46a,color:#000
-</pre>
+```
 
 | Tier | Storage | TTL | Latency | Content |
 | --- | --- | --- | --- | --- |
@@ -173,48 +173,47 @@ The orchestrator is the central coordinator. It receives classified intent + saf
 
 **Query Lifecycle (Swimlane):**
 
-<pre class="mermaid">
+```mermaid
 sequenceDiagram
     participant C as Customer
     participant SG as Safety Gate
     participant IR as Intent Router
-    participant AO as Agent Orchestrator
-    participant M as Memory (3-tier)
+    participant AO as Orchestrator
+    participant M as Memory
     participant KE as Knowledge Engine
-    participant PD as Product Data
     participant TI as Traveler Intel
     participant LLM as Response LLM
     participant SG2 as Output Safety
     participant H as Human Agent
 
-    C->>SG: Query: "Can I cancel my Rome Colosseum tour if it rains?"
+    C->>SG: Can I cancel my Rome Colosseum tour if it rains?
     Note over SG: PII scan + input validation (5ms)
     SG->>IR: Safe query passed
-    Note over IR: Intent: policy_inquiry, Confidence: 0.94 (15ms)
-    IR->>AO: intent: policy, product: Rome Colosseum, topic: weather cancellation
+    Note over IR: Intent policy_inquiry Confidence 0.94 (15ms)
+    IR->>AO: intent policy, product Rome Colosseum
 
     par Parallel Tool Calls
         AO->>M: Load session + user profile
-        Note over M: Booking #VTR-8821 found (8ms)
-        AO->>KE: get_policy(product_id, weather)
-        Note over KE: Cache HIT: weather policy (3ms)
-        AO->>TI: get_tips(product_id, weather)
+        Note over M: Booking VTR-8821 found (8ms)
+        AO->>KE: get_policy product_id weather
+        Note over KE: Cache HIT weather policy (3ms)
+        AO->>TI: get_tips product_id weather
         Note over TI: 2 relevant tips found (12ms)
     end
 
-    AO->>LLM: Generate response with context package
-    Note over LLM: Grounded generation from policy + tips + booking (800ms)
+    AO->>LLM: Generate response with context
+    Note over LLM: Grounded generation (800ms)
 
     LLM->>SG2: Draft response
-    Note over SG2: Hallucination check + PII scan (8ms)
+    Note over SG2: Hallucination + PII check (8ms)
 
-    alt Confidence >= 0.85
-        SG2->>C: Automated response with policy + traveler tips
-    else Confidence < 0.85
-        SG2->>H: Escalate with full context package
+    alt Confidence above 0.85
+        SG2->>C: Automated response with policy + tips
+    else Confidence below 0.85
+        SG2->>H: Escalate with full context
         H->>C: Human-assisted response
     end
-</pre>
+```
 
 **Latency Budget Breakdown:**
 
