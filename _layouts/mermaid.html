@@ -1,0 +1,27 @@
+---
+layout: default
+---
+<article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title | escape }}</h1>
+  </header>
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+
+</article>
+
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+mermaid.initialize({ startOnLoad: false, theme: 'default' });
+document.querySelectorAll('code.language-mermaid').forEach(function(code) {
+  var pre = code.parentElement;
+  var el = document.createElement('pre');
+  el.className = 'mermaid';
+  el.textContent = code.textContent;
+  pre.parentElement.replaceChild(el, pre);
+});
+mermaid.run();
+</script>
