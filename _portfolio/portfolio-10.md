@@ -5,8 +5,6 @@ excerpt: "End-to-end LLM evaluation framework for product descriptions: layered 
 permalink: /portfolio/portfolio-10/
 ---
 
-# AI Evaluation Specialist — Content Quality at Viator
-
 ## Situation
 
 Viator hosts hundreds of thousands of travel experience listings. Product descriptions and marketing copy are critical to conversion — but inconsistent quality, hallucinated details, and brand-voice drift were measurable problems as LLM-generated rewrites scaled up. There was no systematic evaluation framework: quality was checked manually, sporadically, and without reproducibility.
