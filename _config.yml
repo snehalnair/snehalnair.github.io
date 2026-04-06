@@ -8,6 +8,12 @@ markdown: kramdown
 kramdown:
   input: GFM
 future: true
+header_pages:
+  - index.md
+  - portfolio.md
+  - publications.md
+  - cv.md
+  - blog.md
 collections:
   portfolio:
     output: true
