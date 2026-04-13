@@ -14,9 +14,10 @@ title: home
       <p><a class="btn-primary" href="/Snehal%20Nair_Resume_2026.pdf">Download CV</a><br><a href="/portfolio/">Explore my project portfolio</a></p>
     </td>
     <td style="width: 45%; vertical-align: top;">
-      <p>I bridge the gap between cutting-edge AI research and sustainable business impact. With a track record of publications at <strong>KDD 2024</strong> and <strong>KDD 2025</strong>, my work defines the frontier of <strong>Cost-Aware Prompt Optimization (APO)</strong> and <strong>Active Learning</strong> — solving the “trillion-token problem” for modern enterprises.</p>
-      <p>I specialize in architecting AI systems that don’t just work, but scale. From building <strong>high-throughput recommender systems</strong> to optimizing <strong>LLM orchestration</strong>, I lead the transition from experimental R&amp;D to production-grade AI. My mission is to help organizations deploy intelligent systems that maximize performance while aggressively minimizing computational overhead and operational risk.</p>
-      <p><strong>Core Expertise</strong>: AI Strategy &amp; Roadmap | LLM Efficiency | Scalable Machine Learning (PySpark) | Research Leadership (KDD, Towards Data Science)</p>
+      <p>I build AI systems that work in production, not just in notebooks. Over the past decade I have led teams delivering real-time personalisation, RAG and GraphRAG knowledge systems, agentic AI, and LLM evaluation infrastructure at scale -- most recently as Head of AI at Viator (Tripadvisor Group), where I built the AI function from zero to 12+ scientists and engineers and delivered GBP 50M+ in measurable business impact.</p>
+      <p>My research focus is the gap between what AI systems appear to do and what they actually do in production -- from trajectory-level agent evaluation (where per-turn metrics substantially overstate end-to-end quality) to cost-aware prompt optimisation (published at ACM KDD 2025). I co-designed a GenAI safety and evaluation research programme with the University of Edinburgh.</p>
+      <p>I am also the founder of NC, a research-backed AI companion for real-time intent prediction in digital communication, grounded in a pre-registered randomised controlled trial and a computational psychiatry collaboration with Prof Peggy Series at the University of Edinburgh.</p>
+      <p><strong>Core work</strong>: Production LLM systems and agentic AI | RAG and GraphRAG | LLM evaluation methodology | Responsible AI governance | ML team leadership</p>
     </td>
   </tr>
 </table>
