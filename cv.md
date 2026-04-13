@@ -15,13 +15,15 @@ Edinburgh, UK | snehal.1409@gmail.com |
 
 
 ### Executive Summary
-Senior-level Artificial Intelligence (AI) and Machine Learning (ML) leader with 10+ years of global experience delivering enterprise AI strategy, platform scaling, and applied innovation. Proven success in building AI functions from inception, scaling teams from 0 to 12+ members, and deploying production-grade Generative AI (GenAI) and Agentic RAG systems. Published researcher (ACM KDD 2025) focused on the economic optimization of LLMs and high-stakes AI governance. Expert at aligning technical rigor with business growth, having delivered 50M+ in measurable impact.
+Senior ML and AI leader with 10+ years building production AI systems and the teams that deliver them. Built Viator's AI function from zero to 12+ Principal and Senior Scientists and Engineers; owned the roadmap, established governance, and delivered GBP 50M+ in measurable commercial impact across search, personalisation, GenAI content pipelines, and agentic AI. Published at ACM KDD 2025 on cost-aware LLM optimisation. Deep hands-on experience across the full modern AI stack -- LLM fine-tuning, RAG and GraphRAG, agentic systems, trajectory-level evaluation, and production MLOps. Comfortable setting technical direction, translating AI complexity for non-technical stakeholders, and maintaining engineering rigour through delivery.
 
 ### Core Competencies
-- Strategy & Leadership: AI Roadmap Execution, Enterprise AI Governance, Cross-Functional Team Building, Global Stakeholder Management.
-- Generative AI & LLMOps: Agentic AI Systems, Multi-stage RAG/GraphRAG, Self-Critiquing Pipelines, Cost-Aware Prompt Optimization.
-- Applied Machine Learning: Personalization (MAB), Learning-to-Rank (LTR), NLP/ABSA, Computer Vision, Real-Time ML Infrastructure.
-- Operational Excellence: MLOps, Ablation-First Research Culture, Automated Safety Gates, Latency Optimization (<50ms P95).
+- People Leadership: Building and scaling ML teams (0 to 12+); 1:1s and career development; coaching senior contributors; hiring and onboarding; OKR facilitation
+- Generative AI and LLM Systems: LLM fine-tuning (SFT, RLHF-adjacent); RAG and GraphRAG; prompt optimisation (ACM KDD 2025); agentic AI with trajectory-level evaluation; cost-aware inference; 27% cost reduction in production
+- Applied ML: Learning-to-Rank; real-time personalisation; multilingual NLP (ABSA, 20+ languages); churn propensity; energy disaggregation (NILM); deep learning (CNN-RNN, LSTM)
+- MLOps and Infrastructure: CI/CD eval integration; model monitoring (Arize, Grafana); Kubernetes, Seldon, Valohai, Airflow; AWS (SageMaker, EMR, Kinesis); PySpark at batch scale
+- Responsible AI: Safety gate architecture; adversarial red-teaming; PII policy; GDPR-aligned data handling; co-designed GenAI safety programme with University of Edinburgh
+- Stakeholder Communication: C-suite and board-level engagement; translating ML complexity into commercial decisions; cross-functional alignment across product, engineering, legal, and commercial teams
 
 ### Professional Experience
 #### Viator (Tripadvisor Group) | London, UK
@@ -53,7 +55,7 @@ Senior-level Artificial Intelligence (AI) and Machine Learning (ML) leader with 
 - Review Summarization at Scale: Developed a multilingual ABSA and opinion clustering pipeline that reduced LLM token usage by 82% and maintained 94% theme coverage.
 
 ### Technical Toolkit
-- Languages/Frameworks: Python, PyTorch, PySpark, SQL, LangChain, LangGraph, Hugging Face, BERT, BARD, LightGBM.
+- Languages/Frameworks: Python, PyTorch, PySpark, SQL, LangChain, LangGraph, HuggingFace Transformers, BERT, DeBERTa, LightGBM.
 - Infrastructure/Ops: AWS, BigQuery, Qdrant, Redis, Arize, Valohai, Seldon (Kubernetes), Airflow, TogetherAI.
 
 ### Education
