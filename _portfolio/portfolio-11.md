@@ -7,6 +7,8 @@ permalink: /portfolio/portfolio-11/
 
 ## Situation
 
+> **Scope note:** This piece is the *agent-specific* application of the enterprise [AI Governance Framework](/portfolio/portfolio-6/). Portfolio-6 defines the organization-wide policy — source-authority hierarchies, PII handling, the generic Safety Gate. This piece applies and extends those primitives to agentic behaviour: trajectory evaluation, tool-call scope gating, and red-teaming of multi-turn conversations.
+
 After the [AI Customer Service Agent](https://snehalnair.github.io/portfolio/portfolio-2/) moved into pilot, a new class of failure emerged — one that standard NLP evaluation wasn't designed to catch.
 
 Component-level metrics looked healthy. The intent router was accurate. The knowledge engine retrieved correctly. The LLM generated fluent, grounded text. But end-to-end, the agent was failing in ways that only showed up across multiple turns: it gave a correct policy answer in turn 1, then contradicted it in turn 3 after the customer rephrased. It successfully deflected a refund request — but left the customer with no clear path forward, generating a repeat contact within 24 hours. In one case, a subtle prompt injection in a customer message caused the agent to ignore its system instructions and hallucinate a cancellation confirmation.

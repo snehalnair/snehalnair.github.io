@@ -19,7 +19,7 @@ Build a domain-agnostic pipeline that generates explainable, grounded summaries 
 
 ### Phase 2: Structured Extraction (ABSA)
 Aspect-Based Sentiment Analysis extracts (Theme, Aspect, Opinion, Sentiment) tuples:
-- Primary Extractor: Fine-tuned DeBERTa-v3-base on 5,000 labeled review sentences
+- Primary Extractor: Fine-tuned DeBERTa-v3-base on 5,000 labeled review sentences. The training corpus was built in two passes — the 200 human-labeled reviews from Phase 1 (theme validation) seeded an annotation guideline; a dedicated annotation sprint then labeled ~4,800 additional sentences against that guideline, yielding the final 5K sentence training set.
 - Secondary Validator: GPT-3.5 validates extractions; inter-model agreement: 87.3%
 - Conflict Resolution: When models disagree, sample sent to human review queue
 

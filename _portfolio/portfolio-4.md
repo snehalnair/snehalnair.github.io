@@ -29,12 +29,12 @@ When "Weather Policy" node updates to allow cancellations for >30C heat, all lin
 
 ### Pillar 3: Agentic Validation (Coordination Architecture)
 
-| Agent | Trigger | Action | Output | Monitor |
+| Agent | Trigger | Action | Output | Monitored Signal |
 | --- | --- | --- | --- | --- |
-| Detect | Hourly cron + webhook on data change | Detect price/policy/API drift | Change event to queue | Change event received |
-| Validate | Change event received | Check FAQ accuracy against current data | Validation score + delta | Validation score + delta |
-| Correct | Validation score <0.9 or delta >threshold | Trigger FAQ regeneration | New FAQ candidate | New FAQ candidate |
-| Govern | New FAQ candidate | Compare to previous; enforce quality gates | Publish or human review | Quality gate outcomes |
+| Detect | Hourly cron + webhook on data change | Detect price/policy/API drift | Change event to queue | Change-event throughput + source-connector error rate |
+| Validate | Change event received | Check FAQ accuracy against current data | Validation score + delta | Distribution of validation scores; stale-FAQ rate |
+| Correct | Validation score <0.9 or delta >threshold | Trigger FAQ regeneration | New FAQ candidate | Regeneration queue depth + success rate |
+| Govern | New FAQ candidate | Compare to previous; enforce quality gates | Publish or human review | Quality-gate pass/fail ratio; human-review queue age |
 
 Coordination: Redis Streams for event queue; agents are stateless workers consuming from streams. Idempotency keys prevent duplicate processing. Circuit breaker prevents cascade failures (max 100 regenerations/hour).
 
@@ -44,9 +44,9 @@ Coordination: Redis Streams for event queue; agents are stateless workers consum
 | --- | --- | --- | --- |
 | Hallucination Rate | 23% | 2.1% | Manual audit of 500 FAQs |
 | Ticket Deflection | — | 34% | A/B test: FAQ-enabled vs. control |
-| Product Coverage (Day 1) | 12% | 81% | Products with >=3 FAQs |
+| Product Coverage (at launch) | 12% | 81% | Share of active products with >=3 published FAQs on launch day |
 | FAQ Freshness | 45 days avg | < 24 hours | Time from source change to FAQ update |
-| LLM Latency (serving) | 2.1s | 0ms | Cache hit rate 99.2% |
+| LLM Latency (serving, cache hit) | 2.1s | 0ms | Cache hit rate 99.2% on FAQ lookups (measured in isolation; end-to-end agent cache hit is ~92% due to broader query mix — see [portfolio-2](/portfolio/portfolio-2/)) |
 
 ## Sibling Transfer Validation
 1. Similarity threshold: Products must share >80% attribute overlap

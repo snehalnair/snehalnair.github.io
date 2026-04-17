@@ -98,7 +98,7 @@ Classifies incoming queries into actionable intents to determine which tools the
 Two existing systems serve as the agent's knowledge backbone — the [GraphRAG Knowledge Engine](/portfolio/portfolio-4/) for policies and FAQs, and the [Traveler Tips extraction pipeline](/portfolio/portfolio-5/) for experiential intelligence. The agent-specific integration decisions were:
 
 - **Structured tool calls over free-text retrieval:** The orchestrator issues `get_policy(product_id, policy_type)` and `get_faqs(product_id, topic)` rather than embedding-based search. This constrains the LLM to pre-validated knowledge and reduces hallucination surface area
-- **Offline-first with cache:** FAQs are pre-generated offline and served from Redis cache (0ms LLM latency) for 92% of knowledge queries. Only novel or compound queries require real-time generation — this is the single biggest cost and latency lever in the system
+- **Offline-first with cache:** FAQs are pre-generated offline and served from Redis cache (0ms LLM latency) for ~92% of agent knowledge queries. The underlying [FAQ system](/portfolio/portfolio-4/) reports ~99% cache hit on FAQ *lookups* in isolation; the lower 92% figure here reflects the agent's broader query mix, which includes novel, compound, and multi-hop questions that fall outside pre-generated FAQs. Only those queries require real-time generation — this is the single biggest cost and latency lever in the system
 - **Source attribution required:** Every agent response must cite its source tier (Gold: official policy, Silver: product data, Bronze: traveler tips). This is enforced in the response generation prompt and validated by the output safety gate
 - **Tip separation:** Traveler tips are never mixed with official information. They appear in a distinct section ("Based on recent traveler feedback...") to prevent customers from treating crowd-sourced opinions as company policy
 
@@ -198,15 +198,15 @@ sequenceDiagram
 
     par Parallel Tool Calls
         AO->>M: Load session + user profile
-        Note over M: Booking VTR-8821 found (8ms)
+        Note over M: Booking VTR-8821 found (10ms)
         AO->>KE: get_policy product_id weather
-        Note over KE: Cache HIT weather policy (3ms)
+        Note over KE: Cache HIT weather policy (15ms P95)
         AO->>TI: get_tips product_id weather
-        Note over TI: 2 relevant tips found (12ms)
+        Note over TI: 2 relevant tips found (15ms)
     end
 
     AO->>LLM: Generate response with context
-    Note over LLM: Grounded generation (800ms)
+    Note over LLM: Grounded generation (~1200ms)
 
     LLM->>SG2: Draft response
     Note over SG2: Hallucination + PII check (8ms)
@@ -230,7 +230,7 @@ sequenceDiagram
 | Traveler Tips | 15ms | Pre-indexed in Elasticsearch |
 | Response Generation | 1,200ms | GPT-4o-mini with 4K token context cap |
 | Safety Gate (output) | 8ms | Same as input gate |
-| **Total** | **under 1,500ms** | **Parallel tool calls save ~30ms** |
+| **Total** | **under 1,500ms** | **Parallel tool calls save ~25ms (serial max = 40ms, parallel max = 15ms)** |
 
 ---
 
@@ -339,7 +339,7 @@ End-to-end agent evaluation is harder than component evaluation. A correct retri
 | Cost explosion | LLM API costs exceed budget | Token cap; cache-first architecture; cost alerts at 80% daily budget | Per-turn cost tracking; daily cost dashboard |
 | Escalation failures | Customer stuck in loop without human help | Explicit escalation triggers; max 3 automated turns before offering human; sentiment monitoring | Escalation rate by intent; CSAT for escalated conversations |
 | Memory staleness | Outdated booking or policy data served | Write-through cache invalidation; real-time booking status via API; policy propagation via GraphRAG | Cache freshness SLA; stale-data incident tracking |
-| Adversarial inputs | Jailbreak attempts; prompt injection | Multi-layer safety gate (input + output); encoding detection; multi-turn analysis (see [Governance Framework](/portfolio/portfolio-6/)) | Canary token trigger rate; red team quarterly |
+| Adversarial inputs | Jailbreak attempts; prompt injection | Multi-layer safety gate (input + output); encoding detection; multi-turn analysis (see [Governance Framework](/portfolio/portfolio-6/) for enterprise-level policy and [Agent Safety & Evaluation Framework](/portfolio/portfolio-11/) for the agent-specific implementation including trajectory evaluation, tool-call scope gating, and red-teaming) | Canary token trigger rate; red team quarterly |
 
 ## Cross-Portfolio Integration
 

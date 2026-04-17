@@ -29,6 +29,19 @@ Offline metrics often don't translate to online gains. Practices:
 - Experiment Tracking: MLflow for hyperparameters, metrics, and model artifacts
 - Reproducibility: Docker images pinned with exact dependency versions; random seeds logged
 
+## Model-Size Selection Rationale (DeBERTa Family)
+
+Across the portfolio, DeBERTa appears in three sizes tuned to the latency/quality budget of each task:
+
+| Task | Model | Why this size |
+| --- | --- | --- |
+| Intent classification ([portfolio-2](/portfolio/portfolio-2/)) | DeBERTa-v3-base | Many-class classification in the online path; base gives the accuracy headroom needed without GPU serving |
+| ABSA span extraction ([portfolio-3](/portfolio/portfolio-3/)) | DeBERTa-v3-base | Offline batch; accuracy dominates over latency |
+| Tip extraction ([portfolio-5](/portfolio/portfolio-5/)) | DeBERTa-v3-small | Nightly batch on CPU at review scale; small wins on cost at similar fine-tuned F1 |
+| NLI hallucination / consistency ([portfolio-10](/portfolio/portfolio-10/), [portfolio-11](/portfolio/portfolio-11/)) | DeBERTa-v3-large | NLI is the highest-stakes decision (block/escalate); large gives the best MNLI-transfer baseline and calibrated entailment scores |
+
+Rule of thumb: *small* for high-volume offline extraction, *base* for online classifiers in the request path, *large* reserved for decision-critical NLI where a bad call causes a production incident.
+
 ## Embedding Model Selection Framework
 When selecting embedding models, evaluate:
 

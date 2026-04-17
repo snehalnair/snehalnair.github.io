@@ -12,12 +12,12 @@ Design and implement an organization-wide AI Governance and Responsible AI Frame
 
 ## Action
 ### Pillar 1: Safety Gate Implementation ("Critic-at-the-Edge")
-Architecture achieving <10ms validation:
+Architecture achieving <10ms per-gate validation:
 - PII Detection: Regex patterns for common PII (email, phone, SSN) + Presidio for entity recognition (runs in parallel)
 - Content Classification: DistilBERT fine-tuned on 10K labeled examples for prohibited content categories
 - Bias Detection: Lightweight heuristics (word lists, sentiment skew) for initial screen; heavy model for flagged cases only
 - Batching: Requests batched at 10ms intervals; amortizes model inference overhead
-- Total Latency: P50: 4ms, P95: 8ms, P99: 12ms (measured over 1M requests)
+- Per-Gate Latency: P50: 4ms, P95: 8ms, P99: 12ms (measured over 1M requests). Input gates (simpler checks) typically run at the P50 end (~4–5ms); output gates (hallucination + PII egress) at the P95 end (~8ms). The per-gate figures here are what downstream pipelines like the [customer service agent](/portfolio/portfolio-2/) budget against.
 
 ### Pillar 2: Adversarial Robustness
 - Red Team Program: Quarterly adversarial testing by internal security team + external bug bounty

@@ -14,7 +14,7 @@ Automate optimal prompt generation for product classification, maximizing Weight
 Built a comprehensive evaluation framework with my team and created a new hybrid architecture:
 
 1. Hybrid APE-OPRO Architecture  
-Used APE's semantically diverse prompt generation (temperature=1.0, 20 candidates) to initialize OPRO, avoiding OPRO's costly cold-start iterations. APE provided strong initial prompts, while OPRO refined them through iterative optimization.
+Used APE's semantically diverse prompt generation (temperature=1.0, 20 initial candidates) to seed OPRO, avoiding OPRO's costly cold-start iterations. The top 10 APE candidates (ranked by validation F1) were passed into OPRO as the working pool, which then refined them through iterative optimization.
 
 2. Optimizer-Scorer Loop with Cost Controls  
 - Optimizer Model: GPT-4 for candidate prompt generation (high reasoning capability)
@@ -23,7 +23,7 @@ Used APE's semantically diverse prompt generation (temperature=1.0, 20 candidate
 - Evaluation Budget: 200 samples per iteration with 3-fold validation to reduce variance
 
 3. Ablation Studies  
-Systematically tuned breadth (prompt count: 5, 10, 20) and depth (iterations: 3, 5, 10) to identify diminishing returns. Found optimal configuration at 10 prompts x 5 iterations.
+Systematically tuned OPRO breadth (working pool size: 5, 10, 20 prompts) and depth (iterations: 3, 5, 10) to identify diminishing returns. Optimal configuration: 10 prompts per iteration x 5 iterations — larger pools added cost without F1 gain, which is why APE's 20 candidates are filtered to the top 10 before entering OPRO.
 
 ## Results
 
@@ -38,8 +38,8 @@ The hybrid method matched state-of-the-art performance while reducing API costs 
 
 ## System Design & Architecture
 **Architecture Overview:** Modular two-phase system with decoupled optimization and evaluation:
-- Phase 1 (Expansion): APE generates 20 diverse candidate prompts using high-temperature sampling
-- Phase 2 (Scoring): Miner-Critic loop evaluates candidates, feeding top-3 prompts back into optimizer for refinement
+- Phase 1 (Expansion): APE generates 20 diverse candidate prompts using high-temperature sampling; top 10 by validation F1 are retained
+- Phase 2 (Scoring): Optimizer-Scorer loop evaluates the 10-prompt pool, feeding top-3 prompts back into the optimizer for refinement each iteration (5 iterations total)
 - Termination: Early stopping when F1 improvement < 0.5% for 2 consecutive iterations
 
 **Prompt Stability & Model Version Handling:** Optimized prompts often break when underlying LLMs are updated. Implemented:
